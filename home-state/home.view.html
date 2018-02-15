@@ -1,0 +1,95 @@
+
+<ul class="cb-slideshow">
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+</ul>
+<div class="container">
+
+    <div class="col-md-2 add-city">
+        <button class="btn btn-default"
+                data-ng-click="vm.openAddBaseCityModal()"
+        >Add city</button>
+    </div>
+
+    <div class="col-md-8 city-list">
+        <h1 class="text-center">Places To Visit</h1>
+        <hr>
+        <div class="filters">
+            <div class="radio" data-ng-repeat="option in vm.filterOptions">
+                <label>
+                    <input id="filter-input" type="radio" data-ng-model="vm.activeFilter" data-ng-value="option.key">
+                    <span data-ng-bind="option.title"></span>
+                </label>
+            </div>
+        </div>
+        <hr>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>City</th>
+                <th>Temperature <sup>&deg</sup></th>
+                <th>Weather</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="capital in vm.capitals.data | orderBy:'weather.main.temp' | filter : vm.myFilter  track by $index"
+                data-ng-class="{
+                    'neutral': capital.neutral,
+                    'visited': capital.visited,
+                    'going_to_visit': capital.going_to_visit
+                }">
+                <td id="align">
+                    {{capital.title}}
+                </td>
+                <td>
+                    {{capital.weather.main.temp}} <sup>&deg</sup>F
+                </td>
+                <td>
+                    <img ng-src="http://openweathermap.org/img/w/{{capital.weather.weather[0].icon}}.png"
+                         data-ng-attr-title="{{ capital.weather.weather[0].description }}"
+                    >
+                </td>
+                <td>
+                    <button id="button-stutus"
+                            type="button"
+                            class="btn btn-link"
+                            data-ng-click="capital.toggleVisited();"
+                            data-toggle="tooltip" title="Visited!"
+                    ><i class="far fa-check-circle"></i></button>
+
+                    <button id="button-stutus"
+                            type="button"
+                            class="btn btn-link"
+                            data-ng-click="capital.togglePlanningToVisit()"
+                            data-ng-if="!capital.going_to_visit"
+                            data-toggle="tooltip" title="PlanningToVisit"
+                    ><i class="far fa-list-alt"></i></button>
+
+                    <button id="button-stutus"
+                            type="button"
+                            class="btn btn-link"
+                            data-ng-click="vm.capitalsService.data.remove(capital)"
+                            data-toggle="tooltip" title="Delete from list"
+                    ><i class="far fa-times-circle"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-default"
+                data-ng-click="vm.capitalsService.reset()"
+        >Reset city list</button>
+    </div>
+
+</div>
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>

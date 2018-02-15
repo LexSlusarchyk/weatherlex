@@ -1,0 +1,22 @@
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+</div>
+<div class="modal-body">
+    <form data-ng-submit="vm.submit()">
+        <div class="form-group">
+            <label for="name-input" class="form-label">Type city name you wish to add to list:</label>
+            <input class="form-control"
+                   type="text"
+                   placeholder="City name"
+                   ng-model="vm.city.title"
+                   ng-required="true"
+                   id="name-input"
+            >
+        </div>
+        <input class="btn btn-success" type="submit">
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-default" ng-click="$dismiss()">Close</button>
+</div>
