@@ -43,6 +43,7 @@
 
         Capital.prototype.toggleVisited = function () {
             this.visited = !this.visited;
+            this.neutral = true;
 
             if (this.visited) {
                 this.going_to_visit = false;
@@ -54,9 +55,11 @@
 
         Capital.prototype.togglePlanningToVisit = function () {
             this.going_to_visit = !this.going_to_visit;
+            this.neutral = true;
 
             if (this.going_to_visit) {
                 this.visited = false;
+                this.neutral = false;
             }
 
             $rootScope.$emit('capital-updated');

@@ -16,6 +16,10 @@
 
         vm.filterOptions = [                        //option for myFilter
             {
+                title: 'All',
+                key: ''
+            },
+            {
                 title: 'Neutral',
                 key: 'neutral'
             },
